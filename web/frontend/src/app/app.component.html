@@ -1,0 +1,49 @@
+<div style="height: 96vh;" fxLayout="column" >
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <div *ngIf='userService.isLoggedIn()'>
+          <button mat-icon-button (click)="sidenav.toggle()" >
+            <mat-icon>menu</mat-icon>
+          </button>
+      </div>
+      <span>{{title}}</span>
+      <span class="example-spacer"></span>
+      <div *ngIf='userService.isLoggedIn()'>
+        
+          <button mat-button [matMenuTriggerFor]="menu"><mat-icon>account_circle</mat-icon></button>
+          <mat-menu #menu="matMenu">
+              <mat-list>
+              <mat-list-item>
+              <a routerLink="profile/" class="menulinks">
+                <mat-icon>account_circle</mat-icon>
+                Profile
+              </a>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+              <mat-list-item>
+              <a (click)="logout()" class="menulinks">
+                  <mat-icon>exit_to_app</mat-icon>
+                  Logout
+                </a>
+                </mat-list-item>
+              </mat-list>
+          </mat-menu>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  
+  <!-- <div style="height: 64px; display: inline-block">hack fix: margin workaround</div> -->
+
+  <mat-sidenav-container fxFlex fxFlexOffset="64px">
+    <mat-sidenav #sidenav [opened]='sidenavSdowed' [mode]='media.isActive("xs") ? "over" :"side"'>
+      <mat-nav-list *ngIf='userService.isLoggedIn()'>
+          <app-project-list (sendTitle)="receiveTitle($event)"></app-project-list>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content class='main-content'>
+        
+      <router-outlet></router-outlet>
+
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

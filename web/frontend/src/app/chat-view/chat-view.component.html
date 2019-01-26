@@ -1,0 +1,49 @@
+<div fxLayout="column" style="height: 100%;">
+  <div fxFlex="auto">
+      <h3 mat-subheader style="margin: 0;">{{chat.title}}</h3>
+  </div>
+
+  <ul #chatContainer [scrollTop]="chatContainer.scrollHeight" class='chat-messages chat-pattern' fxFlex='grow'>
+      <li *ngFor="let msg of messages" class='chat-message clearfix' [ngClass]="(msg.sender.id==userService.currentUser.id)?'own':'other'">
+        <!-- <mat-icon mat-list-icon>folder</mat-icon> -->
+        <div  class="avatar-circle avatar-image" [style.backgroundColor]='msg.sender.getAvatarColor()'>
+          <ng-container *ngIf=!msg.sender.hasPicture() >{{ msg.sender.getAvatarName() }}</ng-container>
+          <img *ngIf=msg.sender.hasPicture() src="{{ msg.sender.profile_pic }}" class="avatar-circle" alt="{{ msg.sender.getAvatarName() }}"/>
+        </div>
+          <!-- <div>{{msg.sender.username}}</div> -->
+          <!-- <div>{{msg.created_at | date}}</div> -->
+        <div class='message-text round tri'>
+          <p [innerHTML]="msg.text">{{msg.text}}</p>
+          <div fxLayout="row" fxLayoutGap='10px'>
+            <div fxFlex='grow'>
+              <i style=" vertical-align: middle;" [innerHTML]="msg.created_at | date: 'dd.MM.yyyy HH:mm:ss'">{{msg.created_at}}</i>
+            </div>
+            <div fxFlex>
+              <button (click)='deleteMessage(msg)' mat-icon-button style="line-height: 27px; width: 27px; height: 27px;">
+                <mat-icon style="font-size: 13px;">delete_outline</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </li>
+  </ul>
+  
+  <div fxFlex="auto" class='send-message'>
+    <mat-progress-bar class='message-sending' color="accent" [mode]="mode"></mat-progress-bar>
+    <div  fxLayout="row">
+      <div fxFlex='auto'>
+        <button (click)='loadEmoji()' mat-raised-button color="accent">
+            <mat-icon>insert_emoticon</mat-icon>
+        </button>
+      </div>
+      <div fxFlex='grow'>
+        <textarea rows='2' [(ngModel)]='newMeddageText' matInput style="width: 100%"></textarea>
+      </div>
+      <div>
+        <button fxFlex='auto' (click)='sendMessage()' mat-raised-button color="accent">
+            <mat-icon>send</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

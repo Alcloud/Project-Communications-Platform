@@ -1,0 +1,92 @@
+<div class='project-view'>
+  <div class="details" *ngIf='project'>
+    
+    <app-memberlist></app-memberlist>
+  </div>
+ 
+  <mat-tab-group color='accent' (selectedIndexChange)="tabSelectionChanged($event)">
+    <mat-tab label="Message board">
+        <div class='comment' fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-between end">
+          <mat-form-field style="width: 100%">
+              <textarea rows="3" [(ngModel)]='newCommentText' matInput placeholder="Leave a comment"></textarea>
+          </mat-form-field>
+          <button class='publish' (click)='loadEmoji()' mat-raised-button color="primary">
+            <mat-icon>insert_emoticon</mat-icon>
+          </button>
+          <button class='publish' (click)='postComment()' mat-raised-button color="primary">Publish</button>
+        </div>
+
+        <div fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly stretch" class='messages'>
+          <mat-card *ngFor='let msg of messages' [attr.data-id]="msg.id">
+            <mat-card-header>
+              <div mat-card-avatar class="avatar-image" [style.backgroundColor]='(msg.user.getAvatarColor())'>
+                <span *ngIf=!msg.user.hasPicture()>{{ msg.user.getAvatarName() }}</span>
+                <img *ngIf=msg.user.hasPicture() src="{{ msg.user.profile_pic }}" class="avatar-circle" alt="{{ msg.user.getAvatarName() }}"/>
+              </div>
+              <mat-card-title>{{msg.text}}</mat-card-title>
+              <mat-card-subtitle>{{msg.created_at  | date}} - {{msg.user.first_name}} {{msg.user.last_name}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <p *ngIf="msg.comments.length"><b>Comments</b></p>
+              <p *ngFor="let comment of msg.comments">
+                {{comment.user.first_name}} {{comment.user.last_name}}: {{ comment.text }}
+              </p>
+              <mat-form-field style="width: 100%">
+                <textarea rows="3" matInput placeholder="Leave a comment"></textarea>
+              </mat-form-field>
+              <button class='publish' (click)='postCommentToMessage(msg.id)' mat-raised-button color="secondary">Comment</button>
+            </mat-card-content>
+          </mat-card>
+        </div>
+    </mat-tab>
+    <mat-tab label="Chats">
+      <app-chat-list [project_id]='project.id'></app-chat-list>
+    </mat-tab>
+    <mat-tab label="Events">
+      <div class='add-event' fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayout.md="column" fxLayoutGap="10px" fxLayoutAlign="space-between center">
+          
+          <mat-form-field fxFlex>
+            <input matInput placeholder="Title of the event *" [(ngModel)]="title">
+          </mat-form-field>
+        
+          <mat-form-field fxFlex>
+            <input matInput placeholder="Describe the event" [(ngModel)]="description">
+          </mat-form-field>
+        
+          <mat-form-field fxFlex>
+            <input #dateinput matInput [matDatepicker]="picker" placeholder="Event Date *" [(ngModel)]="day">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #picker></mat-datepicker>
+          </mat-form-field>
+        <div fxLayout="row">
+          <input [ngxTimepicker]="toggleTimepicker" placeholder="Begin time *" [disableClick]="true" [format]="24" [(ngModel)]="start_time" readonly>
+          <ngx-material-timepicker-toggle [for]="toggleTimepicker"></ngx-material-timepicker-toggle>
+          <ngx-material-timepicker #toggleTimepicker></ngx-material-timepicker>
+        </div>
+        <div fxLayout="row">
+          <input [ngxTimepicker]="toggleTimepicker1" placeholder="End time *" [disableClick]="true" [format]="24" [(ngModel)]="end_time" readonly>
+          <ngx-material-timepicker-toggle [for]="toggleTimepicker1"></ngx-material-timepicker-toggle>
+          <ngx-material-timepicker #toggleTimepicker1></ngx-material-timepicker>
+        </div>
+          <button class='publish' (click)='postEvent()' mat-raised-button color="primary">ADD</button>
+        
+        </div>
+      <div fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly stretch" class='events'>
+          <mat-card *ngFor='let evt of events'>
+            <mat-card-header>
+              <div mat-card-avatar class="event-image"></div>
+              <mat-card-title>{{evt.day | date}} / {{(evt.start_time + '').substring(0,5)}} - {{(evt.end_time + '').substring(0,5)}}</mat-card-title>
+              <mat-card-subtitle>{{evt.title}}</mat-card-subtitle>
+              <mat-card-subtitle>Created by {{evt.user.first_name}} {{evt.user.last_name}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              {{evt.description}}
+            </mat-card-content>
+          </mat-card>
+        </div>
+      <!--<button class='create-new-event' [routerLink]="['/', 'events', 'new']" mat-fab color="accent">
+        <mat-icon aria-label="Create new event">add</mat-icon>
+      </button> -->
+    </mat-tab>
+  </mat-tab-group>
+</div>

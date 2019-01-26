@@ -1,0 +1,52 @@
+<div fxLayout="column" style="height: 100%;"  *ngIf="type=='private'">
+  
+<div class='new-chat-title' fxFlex>Contacts</div>
+<!-- <mat-form-field class="example-full-width">
+    <input matInput placeholder="Search" [(ngModel)]='filter'>
+</mat-form-field> -->
+
+  <mat-action-list fxFlex='grow'>
+      <button mat-list-item *ngFor="let user of users"  (click)="createPrivateChat(user)" style="text-align: left;">
+        <div matListAvatar class="avatar-image" [style.backgroundColor]='user.getAvatarColor()'>
+          <ng-container *ngIf=!user.hasPicture() >{{ user.getAvatarName() }}</ng-container>
+          <img *ngIf=user.hasPicture() src="{{ user.profile_pic }}" class="avatar-circle" alt="{{ user.getAvatarName() }}"/>
+        </div>
+        <div matLine>{{user.fullName()}}</div>
+        <div matLine>@{{user.username}}</div>
+      </button>
+  </mat-action-list>
+</div>
+
+<div class='new-group-chat' *ngIf="type!='private'" fxLayout="column" style="height: 100%;">
+
+  <div fxFlex>
+    <div  fxLayout="row" style="padding: 20px; background-color: #fff" fxLayoutAlign="space-between center">
+      <mat-form-field class='title' fxFlex>
+        <input matInput [(ngModel)]="title" placeholder="Chat title" required>
+      </mat-form-field>
+      <div fxFlex='grow' class='selected-users' style="display: none;">
+        <div class='placeholder' *ngIf="usersList.selectedOptions.selected.length == 0">Selected users</div>
+        <div *ngFor="let selected of usersList.selectedOptions.selected" style='margin-left: 5px;' class="avatar-circle avatar-image" [style.backgroundColor]='selected.value.getAvatarColor()'>
+          <ng-container *ngIf=!selected.value.hasPicture() >{{ selected.value.getAvatarName() }}</ng-container>
+          <img *ngIf=selected.value.hasPicture() src="{{ selected.value.profile_pic }}" class="avatar-circle" alt="{{ selected.value.getAvatarName() }}"/>
+        </div>
+      </div>
+      <div fxFlex>
+        <button [disabled]="!title||!selectedUsers||selectedUsers.length==0" mat-raised-button color="accent" (click)='createGroupChat()'>
+          <mat-icon>send</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <mat-selection-list [(ngModel)]="selectedUsers" #usersList fxFlex='grow' style='overflow-y: auto;'>
+      <mat-list-option *ngFor="let user of users" [value]="user">
+        <div matListAvatar class="avatar-image" [style.backgroundColor]='user.getAvatarColor()'>
+          <ng-container *ngIf=!user.hasPicture() >{{ user.getAvatarName() }}</ng-container>
+          <img *ngIf=user.hasPicture() src="{{ user.profile_pic }}" class="avatar-circle" alt="{{ user.getAvatarName() }}"/>
+        </div>
+        <div matLine>{{user.fullName()}}</div>
+        <div matLine>@{{user.username}}</div>
+      </mat-list-option>
+  </mat-selection-list>
+</div>

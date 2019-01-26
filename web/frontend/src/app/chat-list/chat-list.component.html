@@ -1,0 +1,28 @@
+<mat-list>
+  <a style="text-decoration: none;" *ngFor="let chat of chats" [routerLink]="['/', 'chats',chat.id]">
+  <mat-list-item >
+    <mat-icon matListAvatar mat-list-icon *ngIf="!chat.private" class="avatar-image avatar-circle" style="line-height:24px;" [style.backgroundColor]='getAvatarColor(chat.title)'>group</mat-icon>
+    <div mat-list-icon *ngIf="chat.private" style="color: #fff; font-size: 18px; text-align: center;" class="avatar-image avatar-circle member-circle user-circle" >
+      <ng-container *ngIf=!getUser(chat.users[1]).hasPicture()><div class="round" [style.backgroundColor]='getUser(chat.users[1]).getAvatarColor()'>{{ getUser(chat.users[1]).getAvatarName() }} </div></ng-container>
+      <img *ngIf=getUser(chat.users[1]).hasPicture() src="{{ getUser(chat.users[1]).profile_pic }}" class="avatar-circle avatar-image img-circle" alt="{{ getUser(chat.users[1]).getAvatarName() }}"/>
+    </div>
+    <h4 mat-line>{{chat.title}}</h4>
+    <p *ngIf="chat.last_message" mat-line style="color: #aaa;"> {{chat.last_message.sender.username}}: {{chat.last_message.text}} </p>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  </a>
+</mat-list>
+
+<button class='create-new' [matMenuTriggerFor]="menu" mat-fab color="accent">
+    <mat-icon aria-label="Create new chat">add</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+    <button mat-menu-item [routerLink]="['/projects', project_id, 'chats', 'new', 'group']">
+      <mat-icon>group_add</mat-icon>
+      <span>Group chat</span>
+    </button>
+    <button mat-menu-item [routerLink]="['/projects', project_id, 'chats', 'new', 'private']">
+      <mat-icon>person_add</mat-icon>
+      <span>Private chat</span>
+    </button>
+  </mat-menu>

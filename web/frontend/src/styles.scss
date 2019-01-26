@@ -1,0 +1,110 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+$standard-font: Roboto,"Helvetica Neue",sans-serif;
+
+body{
+  font-family: $standard-font;
+  margin: 0;
+}
+
+.mat-tab-labels{
+  background-color: #fff;
+}
+
+.mat-drawer-inner-container{
+  overflow-x: hidden !important;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+  }
+  
+  .error-message{
+    color: #E77;
+    margin-bottom: 20px;
+  }
+  
+  .avatar-circle{
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    object-fit: cover;
+  }
+  
+  .avatar-image{
+    text-align: center;
+    line-height: 40px;
+    color: #fff;
+  }
+  
+  
+  .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  .user-form{
+    mat-card{
+        max-height: 100%;
+        padding: 20px;
+    }
+    table{
+        width: 100%
+    }
+}
+
+/* Center the loader */
+#loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Add animation to "page content" */
+.animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s
+}
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 } 
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom { 
+  from{ bottom:-100px; opacity:0 } 
+  to{ bottom:0; opacity:1 }
+}
+
+#myDiv {
+  display: none;
+  text-align: center;
+}

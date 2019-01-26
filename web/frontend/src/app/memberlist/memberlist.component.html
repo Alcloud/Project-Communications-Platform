@@ -1,0 +1,12 @@
+<div fxFlex='grow'>
+  <!--<button *ngFor="let user of users" class="avatar-image avatar-circle" [style.backgroundColor]='user.getAvatarColor()' >-->
+    <!--<div matListAvatar >{{user.getAvatarName()}}</div>-->
+  <!--</button>-->
+  <button *ngFor="let user of users" matListAvatar class="avatar-image avatar-circle member-circle user-circle" style="background-color: white">
+    <ng-container *ngIf=!user.hasPicture() ><div class="round" [style.backgroundColor]='user.getAvatarColor()'>{{ user.getAvatarName() }}</div></ng-container >
+    <img *ngIf=user.hasPicture() src="{{ user.profile_pic }}" class="avatar-image avatar-circle img-circle" alt="{{ user.getAvatarName() }}"/>
+  </button>
+  <button class="avatar-image member-circle avatar-circle" style="color: black;"(click)="openDialog()">
+       <mat-icon class="user-circle"> add </mat-icon> 
+  </button>
+</div>

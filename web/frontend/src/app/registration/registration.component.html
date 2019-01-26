@@ -1,0 +1,45 @@
+<div fxLayout='column' fxFill fxLayoutAlign="space-around center" class="user-form">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Sign up</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form class="example-form">
+          
+            
+              <div fxLayout='row' fxLayout.sm='column' fxLayout.xs='column' fxLayoutAlign="top center">
+                <mat-form-field fxFlex>
+                  <input matInput placeholder="Username" [(ngModel)]="user.username" name="username" fxFlex (keyup.enter)="submit()" required>
+                </mat-form-field>
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="E-Mail" [(ngModel)]="user.email" name="email" fxFlex (keyup.enter)="submit()" required>
+                    </mat-form-field>
+                  </div>
+           
+                <div fxLayout='row' fxLayoutGap='20px' fxLayout.sm='column' fxLayout.xs='column' fxLayoutAlign="top center">
+                  <mat-form-field fxFlex>
+                    <input matInput placeholder="First name" [(ngModel)]="user.first_name" name="first_name" (keyup.enter)="submit()" required>
+                  </mat-form-field>
+                  <mat-form-field fxFlex>
+                    <input matInput placeholder="Last name" [(ngModel)]="user.last_name" name="last_name" (keyup.enter)="submit()" required>
+                  </mat-form-field>
+                </div>
+           
+              <div fxLayout='row' fxLayoutGap='20px' fxLayout.sm='column' fxLayout.xs='column' fxLayoutAlign="top center">
+                <mat-form-field fxFlex>
+                  <input matInput placeholder="Password" [(ngModel)]="user.password" type="password" name="password" (keyup.enter)="submit()" required>
+                </mat-form-field>
+                
+                <mat-form-field fxFlex>
+                  <input matInput placeholder="Confirm password" [(ngModel)]="user.password_conformation" type="password" name="password_conformation" (keyup.enter)="submit()" required>
+                </mat-form-field>
+              </div>
+         
+        </form>
+        <!--<mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>-->
+        <div class='error-message' *ngFor="let msg of errorMsg">{{msg[0]&&msg[0]+': '}}{{msg[1]}}</div>
+      </mat-card-content>
+      <button mat-raised-button (click)="submit()" color="primary">Submit</button>
+      <a mat-flat-button [routerLink]="['/login']">Back to login</a>
+    </mat-card>
+    </div>

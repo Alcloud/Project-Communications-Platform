@@ -1,0 +1,9 @@
+<div fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly stretch">
+  <h3>Your projects</h3>
+  <mat-list *ngFor='let project of projects'>
+    <mat-list-item>
+      <a routerLink='projects/{{project.id}}' (click)='changeTitle(project.title)'>{{project.title}}</a>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+  </mat-list>
+</div>

@@ -1,0 +1,30 @@
+<div fxLayout='column' fxFill fxLayoutAlign="center center" fxLayoutAlign.xs="start center" class="user-form login">
+  <mat-card *ngIf='_userService.isLoggedIn()'>
+    {{_userService.username}}, you are logged in.
+    <button mat-raised-button (click)="logout()" color="primary">Logout</button>
+  </mat-card>
+
+  <mat-card *ngIf='!_userService.isLoggedIn()' fxLayout='column'>
+    <mat-card-header>
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <mat-card-content fxLayout='column'>
+
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Username" [(ngModel)]="user.username" name="username" (keyup.enter)="login()" required/>
+      </mat-form-field>
+
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Password" [(ngModel)]="user.password" type="password" name="password" (keyup.enter)="login()" required />
+      </mat-form-field>
+
+      <div class='error-message' *ngFor="let msg of errorMsg">
+        {{msg[0] && msg[0] + ': '}}{{msg[1]}}
+      </div>
+      <button mat-raised-button (click)="login()" color="primary">Login</button>
+      <mat-progress-bar class='loggingin' color="primary" [mode]="mode"></mat-progress-bar>
+      <div><a mat-flat-button [routerLink]="['/registration']">Sign up</a></div>
+      <div><a mat-flat-button [routerLink]="['/password-reset']">Forgot password?</a></div>
+    </mat-card-content>
+  </mat-card>
+</div>

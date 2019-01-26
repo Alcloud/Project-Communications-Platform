@@ -1,0 +1,15 @@
+.link {
+    padding-top: 10px;
+}
+
+@media screen and (max-width: 959px){
+    mat-card{    
+        width: 300px;
+
+        button{
+            width:100%;
+        }
+
+    }
+
+}

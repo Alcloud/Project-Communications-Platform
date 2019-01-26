@@ -1,0 +1,9 @@
+<div mat-dialog-content>
+  <div *ngFor="let e of emojiList">
+    <span (click)="data.emo=e">{{e}}</span>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="secondary" (click)="onNoClick()">Cancel</button>
+  <button mat-raised-button color="primary"  [mat-dialog-close]="data.emo" cdkFocusInitial>Ok</button>
+</div>

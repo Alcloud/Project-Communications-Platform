@@ -1,0 +1,23 @@
+<mat-list fxLayout="column"  fxLayoutAlign="center center">
+  <mat-list-item fxLayoutAlign="center center">
+    <h2>Hello {{_userService.currentUser.first_name}}!</h2>
+  </mat-list-item>
+  <mat-list-item class="avatar-image avatar-circle" style="height: 200px;" fxLayoutAlign="center center">
+    <ng-container *ngIf=!_userService.currentUser.hasPicture()><div class="initials" [style.backgroundColor]='_userService.currentUser.getAvatarColor()'>{{ _userService.currentUser.getAvatarName() }}</div></ng-container>
+    <img *ngIf=_userService.currentUser.hasPicture() src="{{ _userService.currentUser.profile_pic }}"/>
+  </mat-list-item>
+  <mat-list-item fxLayoutAlign="center center">
+      <h4>Choose a Profile-Picture...</h4>
+  </mat-list-item>
+  <mat-list-item fxLayoutAlign="center center">    
+    <input type="file" accept="image/*" ng2FileSelect [uploader]="uploader"/>
+  
+   <!--<div class='error-message' *ngFor="let msg of errorMsg">
+      {{msg[0]&&msg[0]+': '}}{{msg[1]}}
+    </div>-->
+  </mat-list-item>
+  <mat-list-item fxLayoutAlign="center center"> 
+  <h4>... or ...</h4>
+  </mat-list-item>
+    <button mat-raised-button (click)="createNewProject()" color="primary" >Create New Project</button>
+</mat-list>

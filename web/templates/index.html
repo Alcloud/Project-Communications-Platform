@@ -1,0 +1,16 @@
+{# Use and change also the angular-index-file ../src/index.html  #}
+
+{% extends "base.html" %}
+{% load staticfiles %}
+ 
+{% block content %}
+  <app-root><div id="loader"></div></app-root>
+  <noscript>Please enable JavaScript to continue using this application.</noscript>
+ 
+  <script type="text/javascript" src="{% static 'frontend/runtime.js' %}"></script>
+  <script type="text/javascript" src="{% static 'frontend/polyfills.js' %}"></script>
+  <script type="text/javascript" src="{% static 'frontend/styles.js' %}"></script>
+  <script type="text/javascript" src="{% static 'frontend/vendor.js' %}"></script>
+  <script type="text/javascript" src="{% static 'frontend/main.js' %}"></script>
+ 
+{% endblock %}

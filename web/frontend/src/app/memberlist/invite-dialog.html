@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Invite your Teammembers! </h1>
+<div mat-dialog-content>
+    <mat-form-field >
+        <input [(ngModel)]='emailAdress' matInput maxlength="60" placeholder="Email" [formControl]="emailFormControl">
+        <mat-error *ngIf="emailFormControl.hasError('email')">
+          Please enter a valid email address
+        </mat-error>
+      </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-raised-button [mat-dialog-close]="emailAdress">Invite</button>
+  
+</div>

@@ -1,0 +1,55 @@
+.project-view{
+
+    .details{
+        border: #eee solid 1px;
+        background-color: #fff;
+        // margin-bottom: 20px;
+        padding: 20px;
+
+        .header{
+            margin-bottom: 20px;
+            .title{
+                font-size: 1.5em;
+            }
+            .subtitle{
+                color: #aaa;
+            }
+        }
+    }
+
+    .comment{
+        padding: 20px 20px 0;
+        background-color: #fff;
+
+        .publish{
+            margin-bottom: 1.25em;
+            margin-right: 2.25em;
+            padding-right: 1.25em;
+        }
+     }
+
+    .add-event{
+        padding: 20px 20px 0;
+        background-color: #fff;
+
+        .publish{
+            margin-bottom: 1.25em;
+        }
+     }
+
+    .messages{
+        margin: 20px;
+    }
+    .events{
+        margin: 20px;
+    }
+}
+.create-new-event{
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+}
+.event-image{
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToyKnZJMtEiKe-U2zSr7yUJrRieGGap3AaLCBGniM6bX6KUzvHuQ');
+    background-size: cover;
+}
