@@ -1,3 +1,12 @@
+## Project Communications Platform
+PKP is a platform that allows you to communicate safely and easily within a project.
+### basic functions:
+* In PKP you can create and manage projects, especially invite new members
+* With PKP you can chat (also group chat), post information and files via a message board, as well as organize online meetings
+#### Chat
+#### Message Board
+#### Meetings
+
 ## Getting started
 ### Basic requirements
 Python, git, pip, node.js, npm
